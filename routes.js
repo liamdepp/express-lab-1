@@ -10,6 +10,7 @@ const items = [
   { id: 2, product: "Samsung Galaxy", price: 950, quantity: 100 },
   { id: 3, product: "Nokia", price: 20, quantity: 800 }
 ];
+let nextId = 4;
 
 itemRoutes.get("/cart-items", (req, res) => {
   res.json(items);
@@ -29,6 +30,7 @@ itemRoutes.get("/cart-items/:id", (req, res)=> {
 
 itemRoutes.post("/cart-items", (req, res) => {
   const anItem = req.body;
+  anItem.id = nextId++;
   items.push(anItem);
   res.status(201);
   res.json(anItem);
