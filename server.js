@@ -6,10 +6,9 @@ const itemRoutes = require("./routes")
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/", itemRoutes)
+app.use("/cart-items", itemRoutes)
 
 app.get("/", (req, res) => {
-  res.send("it lives!")
 });
 
 const port = 3001;

@@ -2,7 +2,6 @@ const express = require("express");
 const itemRoutes = express.Router();
 
 itemRoutes.get("/", (req, res) => {
-  res.send("it lives!")
 });
 
 const items = [
@@ -12,30 +11,30 @@ const items = [
   { id: 3, product: "Nokia", price: 20, quantity: 800 }
 ];
 
-itemRoutes.get("/items", (req, res) => {
+itemRoutes.get("/cart-items", (req, res) => {
   res.json(items);
 });
 
-itemRoutes.get("/items/:id", (req, res)=> {
+itemRoutes.get("/cart-items/:id", (req, res)=> {
   const id = parseInt(req.params.id);
   console.log(id);
   let foundItem = items.find(anItem => anItem.id === id);
   if (foundItem) {
     res.json(foundItem);
   } else {
-    res.status(404); // Not found
+    res.status(404); 
     res.send(`No item with id${id}`);
   }
 });
 
-itemRoutes.post("/items", (req, res) => {
+itemRoutes.post("/cart-items", (req, res) => {
   const anItem = req.body;
   items.push(anItem);
   res.status(201);
   res.json(anItem);
 });
 
-itemRoutes.put("/items/:id", (req, res) => {
+itemRoutes.put("/cart-items/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const item = req.body;
   item.id = id;
@@ -44,7 +43,7 @@ itemRoutes.put("/items/:id", (req, res) => {
   res.json(item);
 });
 
-itemRoutes.delete("/items/:id", (req, res) => {
+itemRoutes.delete("/cart-items/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = items.findIndex(i => i.id === id);
   if (index !== -1) {
